@@ -4,7 +4,7 @@ namespace CMSCore;
 // create, edit, update, delete
 //include ('databaseConnection.php');
 //include ('Lilly.php');
-//echo $servername;
+use CMSCore\;
 class Article implements cmsItem{
   // core properties
 

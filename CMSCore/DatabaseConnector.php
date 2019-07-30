@@ -1,7 +1,9 @@
 <?php
 namespace CMSCore;
+use Exception;
 use mysqli;
-include_once 'DatabaseHandler.php';
+use CMSCore\DatabaseHandler;
+
 class CMSObject implements DatabaseHandler{
 	public $conn;
 	public function establishConnection(){
