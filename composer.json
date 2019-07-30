@@ -1,0 +1,11 @@
+
+	{
+    "autoload": {
+        "classmap": ["CMSCore/"]
+    
+	},
+	"name" : "radislav/cmscore_project",
+	"description" : "Small CMS from scratch"
+	}
+
+	

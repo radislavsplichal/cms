@@ -4,7 +4,7 @@ use Exception;
 use mysqli;
 use CMSCore\DatabaseHandler;
 
-class CMSObject implements DatabaseHandler{
+class DatabaseConnector implements DatabaseHandler{
 	public $conn;
 	public function establishConnection(){
 		// configuration of the database

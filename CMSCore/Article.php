@@ -1,47 +1,43 @@
 <?php
 namespace CMSCore;
-// This class is responsible for all actions regarding the articles in the app.
-// create, edit, update, delete
-//include ('databaseConnection.php');
-//include ('Lilly.php');
-use CMSCore\;
+//require 'cmsItem.php';
 class Article implements cmsItem{
   // core properties
-
+  private $itemType = 'articles'; // corresponds to DB table name
   private $articleId;
   private $articleDateCreated;
   private $articleDateUpdated;
   private $articleText;
   private $articleTitle;
   private $articleAuthor;
+  private $fkCategory;
   
   // utility properties
   private $querry;
 
-  function __construct($cdate,$adate,$text,$title,$author){
+  function __construct($cdate,$adate,$text,$title,$author,$fkCategory){
       $this->articleAuthor = $author;
       $this->articleDateCreated = $cdate;
       $this->articleDateUpdated = $adate;
       $this->articleText = $text;
       $this->articleTitle = $title;
+      $this->fkCategory = $fkCategory;
   }
   
-public function insertArticle ($title, $text) {
-	$date = date('d.m.Y');
-	$author = "Admin";
-	$type = "articles";
+public function save() {
+	
 	//$arguments ="author, article, dateCreated, title";
-	$values = $author."','".$text."','".$date."','".$title;
+    $values = $this->articleDateCreated."','".$this->articleDateUpdated."','".$this->articleAuthor."','".$this->articleTitle."','".$this->articleText."','".$this->fkCategory."','".$this->articleText;
 
 
-	$bot = new Lilly;
-	$bot->saveObject($type,$arguments,$values);
-	echo 'Article Saved';
+	$bot = new DatabaseConnector();
+	$bot->saveObject($this->itemType,$values);
+	echo print_r($bot->saveObject($this->itemType,$values));
 }
   //$sql = "INSERT INTO articles (author, article, dateCreated, title) VALUES ('$author', '$text', '$date', '$title');";
 
 
-
+/*
 public function displayArticle () {
   echo '<div id="'.$this->id.'" class="row">
         <div class="col-md-1"></div>
@@ -90,6 +86,7 @@ if ($conn->query($sql) === TRUE){
                   }
 
                 }
+*/
 public function read($sql)
     {}
 
@@ -97,9 +94,6 @@ public function edit($id, $type, $values)
     {}
 
 public function show()
-    {}
-
-public function save($type, $values)
     {}
 
 public function delete($id, $type)
