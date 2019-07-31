@@ -20,6 +20,7 @@ class DatabaseConnector implements DatabaseHandler{
 	}
 	public function executeQuerry($sql){
 	    $result = $this->conn->query($sql);
+	    //echo "Do I run twice?";
 	    if ($result == TRUE){
 			//$result = $this->conn->query($sql);
 			echo "Success!";
@@ -31,7 +32,7 @@ class DatabaseConnector implements DatabaseHandler{
 		} else {
 			// throw new Exception('SQL Querry Error'.$sql.$this->conn->error);
 			$response = ['Connection Error',$this->conn->error];
-			$result = $this->conn->query($sql);
+			$result = "SQL ERROR!";
 			$this->conn->close();
 			//$conn.close();
 			return $responseArray  = array("responseMessage" => $response,"responseContent" => $result);
@@ -45,10 +46,11 @@ class DatabaseConnector implements DatabaseHandler{
 		$this->executeQuerry($sql);
 	}
 	public function saveObject ($type,$values) {
+	    //echo "Am I twice?";
 		$this->establishConnection();		
 		// values need to be separated by "','" and concatanated by .
 		$sql= "INSERT INTO $type VALUES ('$values');";
-		echo $sql;
+		//echo $sql;
 		return $response = $this->executeQuerry($sql);
 	}
 	public function deleteObject($id,$type){
@@ -71,7 +73,7 @@ class DatabaseConnector implements DatabaseHandler{
 		$result_array = array();
 		if ($result->num_rows > 0) {
 		    while($row = $result->fetch_assoc()) {
-		        echo $row['cus_username'].$row['cus_pass'];
+		        //echo $row['cus_username'].$row['cus_pass'];
 		        array_push($result_array, $row);
 		    }
 		}

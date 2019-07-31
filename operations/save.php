@@ -2,7 +2,7 @@
 
 use CMSCore\Article;
 
-require __DIR__ . '../vendor/autoload.php';
+require __DIR__ . "/../vendor/autoload.php";
 //require '../CMSCore/Article.php';
 
 //ITEM ID SHOULD BE IN THE FORM HIDDEN FIELD

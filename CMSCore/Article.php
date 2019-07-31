@@ -16,6 +16,7 @@ class Article implements cmsItem{
   private $querry;
 
   function __construct($cdate,$adate,$text,$title,$author,$fkCategory){
+      $this->articleId = uniqid('article_');
       $this->articleAuthor = $author;
       $this->articleDateCreated = $cdate;
       $this->articleDateUpdated = $adate;
@@ -27,15 +28,15 @@ class Article implements cmsItem{
 public function save() {
 	
 	//$arguments ="author, article, dateCreated, title";
-    $values = $this->articleDateCreated."','".$this->articleDateUpdated."','".$this->articleAuthor."','".$this->articleTitle."','".$this->articleText."','".$this->fkCategory."','".$this->articleText;
+    $values = $this->articleDateCreated."','".$this->articleDateUpdated."','".$this->articleAuthor."','".$this->articleTitle."','".$this->fkCategory."','".$this->articleText."','".$this->articleId;
 
 
 	$bot = new DatabaseConnector();
-	$bot->saveObject($this->itemType,$values);
+	/*$bot->saveObject($this->itemType,$values);*/
 	echo print_r($bot->saveObject($this->itemType,$values));
+	$bot = null;
 }
-  //$sql = "INSERT INTO articles (author, article, dateCreated, title) VALUES ('$author', '$text', '$date', '$title');";
-
+  
 
 /*
 public function displayArticle () {
@@ -87,8 +88,13 @@ if ($conn->query($sql) === TRUE){
 
                 }
 */
-public function read($sql)
-    {}
+public function read($articleID)
+{
+        $sql = 'SELECT * FROM ARTICLES WHERE Id ='.$this->articleId."'";
+        $bot = new DatabaseConnector();
+        print_r($bot->readObject($sql));
+        $bot = null;
+}
 
 public function edit($id, $type, $values)
     {}

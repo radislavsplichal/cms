@@ -1,4 +1,8 @@
 <?php 
+
+require __DIR__ . "/vendor/autoload.php";
+$aviewer = new ArticleViewer("Rodina", "user");
+$aviewer->displayOutput("Rodina");
 ?>
 
 <!DOCTYPE html>
@@ -11,9 +15,9 @@
         
         <h1>Nový článek</h1>
 
-s
+
         <!-- This is a New Article Form -->
-        <form  class="form-horizontal" action="save.php" enctype="multipart/form-data" method="post" >
+        <form  class="form-horizontal" action="operations/save.php" enctype="multipart/form-data" method="post" >
     
             
         <div class="form-group">
