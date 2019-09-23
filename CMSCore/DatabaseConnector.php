@@ -19,6 +19,7 @@ class DatabaseConnector implements DatabaseHandler{
 		}
 	}
 	public function executeQuerry($sql){
+	    $this->establishConnection();
 	    $result = $this->conn->query($sql);
 	    //echo "Do I run twice?";
 	    if ($result == TRUE){
@@ -38,8 +39,40 @@ class DatabaseConnector implements DatabaseHandler{
 			return $responseArray  = array("responseMessage" => $response,"responseContent" => $result);
 		}
 	}
+	public function executeQuerryPreparedStatment($target,$setOfValues){
+	    $this->establishConnection();
+	    $result = $this->conn->query($sql);
+	    
+	    
+	    
+	    
+	    /* Prepare an insert statement */
+	    /*$query = "INSERT INTO ? VALUES (" ."")";
+	    $stmt = $mysqli->prepare($query);
+	    */
+	    $stmt->bind_param($setOfValues[1], $setOfValues[2], $val2, $val3);
+	    //echo "Do I run twice?";
+	    if ($result == TRUE){
+	        //$result = $this->conn->query($sql);
+	        echo "Success!";
+	        $response = 'OK';
+	        $this->conn->close();
+	        //$conn.close();
+	        $responseArray = array("responseMessage" => $response,"responseContent" => $result);
+	        return $responseArray;
+	    } else {
+	        // throw new Exception('SQL Querry Error'.$sql.$this->conn->error);
+	        $response = ['Connection Error',$this->conn->error];
+	        $result = "SQL ERROR!";
+	        $this->conn->close();
+	        //$conn.close();
+	        return $responseArray  = array("responseMessage" => $response,"responseContent" => $result);
+	    }
+	}
+	
+	
 	public function createObject($type,$objectName,$arguments) {
-		$this->establishConnection();
+		
 		// values need to be separated by "','" and concatanated by .
 		$sql= "CREATE $type $objectName ($arguments);";
 		echo $sql.'</br>';
@@ -47,7 +80,7 @@ class DatabaseConnector implements DatabaseHandler{
 	}
 	public function saveObject ($type,$values) {
 	    //echo "Am I twice?";
-		$this->establishConnection();		
+		//$this->establishConnection();		
 		// values need to be separated by "','" and concatanated by .
 		$sql= "INSERT INTO $type VALUES ('$values');";
 		//echo $sql;
@@ -66,7 +99,7 @@ class DatabaseConnector implements DatabaseHandler{
 		}
 	}
 	public function readObject($sql){
-		$this->establishConnection();
+		//$this->establishConnection();
 		//echo $sql;
 		$resultAll = $this->executeQuerry($sql);
 		$result = $resultAll['responseContent'];
@@ -77,7 +110,7 @@ class DatabaseConnector implements DatabaseHandler{
 		        array_push($result_array, $row);
 		    }
 		}
-		print_r($resultAll);
+		//print_r($resultAll);
 		return $result_array;
 	}
 	public function sanitizeInputs($values) {

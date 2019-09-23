@@ -1,76 +1,46 @@
 <?php 
-
 require __DIR__ . "/vendor/autoload.php";
-$aviewer = new ArticleViewer("Rodina", "user");
-$aviewer->displayOutput("Rodina");
+session_start();
+if (isset($_GET["router"]) == false ){
+$router = 0;
+}
+echo $router = $_GET["router"];
 ?>
 
 <!DOCTYPE html>
     <head>
+    	 
     	<meta charset="UTF-8">
+    	
+	    <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     </head>
     <body>
+    	<ul class="nav nav-pills">
+          <li role="presentation" class="active"><a href="?router=0">Home</a></li>
+          <li role="presentation"><a href="?router=1">Rodina</a></li>
+          <li role="presentation"><a href="?router=2">Programovani</a></li>
+		</ul>
+    	<?php
+    	include_once 'router.php';
+    	echo $message = MessageViewCreator::createMessage("Hello World! This is a devloper preview version 0.1", "success");
+    	
+    	
+    	?>
+      <div class="container-fluid">
       
+        <?php 
+        $aviewer = new ArticleViewer($router, "user");
+        $aviewer->displayOutput($router);
         
-        
-        <h1>Nový článek</h1>
-
-
-        <!-- This is a New Article Form -->
-        <form  class="form-horizontal" action="operations/save.php" enctype="multipart/form-data" method="post" >
-    
-            
-        <div class="form-group">
-     <label for="rubrika" class="col-sm-2 control-label">Rubrika:</label>
-        <div class="col-sm-5">      
-            <select id="rubrika" class="form-control" class="col-sm-5" name="selecttopic">
-					<option  value="rodina">Rodina</option>
-                    <option  value="home">Domů</option>
-					 
-                </select>
-            </div>
-        </div>
-            
-
-     
-        
-            <div class="form-group">
-     <label for="nazevclanku" class="col-sm-2 control-label">Název článku:</label>
-        <div class="col-sm-5">      
-            <input id="nazevclanku" class="form-control" placeholder="Název" type="text" name="title" value=""> 
-
-            </div>
-        </div>
-
-
-            <div class="form-group">
-     <label for="nazevclanku" class="col-sm-2 control-label">Text článku:</label>
-        <div class="col-sm-5">      
-           <textarea class="form-control" name="articlebody" rows="10" cols="3" ></textarea>
-            </div>
-        </div>
-          
+        echo $message = MessageViewCreator::createMessage("Nela Je Nejlepsi", "warning")
+        ?>
+      </div>
        
-       
-            
-<!--          <div class="form-group"> -->
-<!--      <label for="obrazek" class="col-sm-2 control-label">Obrazek:</label> -->
-<!--         <div class="col-sm-5">       -->
-<!--            <input id="obrazek" class="form-control" type="file" name="fileimg" > -->
-
-<!--             </div> -->
-<!--         </div> -->
-
-       
-            <div class="form-group">
-     <label for="odeslat" class="col-sm-2 control-label"></label>
-        <div class="col-sm-5">  
-         
-       <button id="odeslat" type="submit" class="btn btn-primary btn-lg" name="submit">Odeslat</button>
-
-
-             </div>
-        </div>
-        
-        </form>
     </body>
