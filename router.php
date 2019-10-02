@@ -11,6 +11,8 @@ if (isset($router) == FALSE) {
             break;
         case 2: $router = "Programovani";
             break;
+        case 10: include 'forms\newArticleForm.php';
+            break;
     }
     
 }

@@ -1,7 +1,7 @@
 <?php
 namespace CMSCore;
 //require 'cmsItem.php';
-class Article implements cmsItem{
+class Article {
   // core properties
   private $itemType = 'articles'; // corresponds to DB table name
   private $articleId;
@@ -25,7 +25,7 @@ class Article implements cmsItem{
       $this->fkCategory = $fkCategory;
   }
   
-public function save() {
+public function newArticle() {
 	
 	//$arguments ="author, article, dateCreated, title";
     $values = $this->articleDateCreated."','".$this->articleDateUpdated."','".$this->articleAuthor."','".$this->articleTitle."','".$this->fkCategory."','".$this->articleText."','".$this->articleId;
@@ -100,7 +100,7 @@ public function edit($id, $type, $values)
     {}
 
 public function show()
-    {}
+    {echo "test";}
 
 public function delete($id, $type)
     {}

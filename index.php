@@ -3,8 +3,9 @@ require __DIR__ . "/vendor/autoload.php";
 session_start();
 if (isset($_GET["router"]) == false ){
 $router = 0;
-}
+} else {
 echo $router = $_GET["router"];
+}
 ?>
 
 <!DOCTYPE html>
@@ -26,6 +27,7 @@ echo $router = $_GET["router"];
           <li role="presentation" class="active"><a href="?router=0">Home</a></li>
           <li role="presentation"><a href="?router=1">Rodina</a></li>
           <li role="presentation"><a href="?router=2">Programovani</a></li>
+		  <li role="presentation"><a href="?router=10">New Article</a></li>
 		</ul>
     	<?php
     	include_once 'router.php';
@@ -36,6 +38,8 @@ echo $router = $_GET["router"];
       <div class="container-fluid">
       
         <?php 
+        
+        //This section should contain a new entity - pageViewer
         $aviewer = new ArticleViewer($router, "user");
         $aviewer->displayOutput($router);
         
